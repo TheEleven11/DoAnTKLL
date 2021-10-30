@@ -1,23 +1,16 @@
-
 #include "timer.h"
+#include "fsm_button.h"
+#include "button_reading.h"
 
-const int buttonPin = 2;     
-const int ledPin =  13; 
-int ledStatus = LOW;     
 void setup()
 {
-    pinMode(ledPin, OUTPUT);
-    pinMode(buttonPin, INPUT);
-    digitalWrite(ledPin, LOW);
-    setTimer0(1000);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+  digitalWrite(ledPin, LOW);
 }
 
 void loop() {
-  if(timer0_flag == 1){
-    ledStatus = !ledStatus;
-    digitalWrite(ledPin, ledStatus);
-    setTimer0(1000);
-  }
-  timerRun();
+  button_reading();
+  fsm_for_button();
   delay(10);
 }
